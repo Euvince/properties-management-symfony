@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les derners biens!{% endblock %}
+
+{% block body %}
+    <div class="jumbotron text-center bg-grey">
+        <h1>Agence de biens immobiliers</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            Possimus commodi odit tempore perspiciatis maxime. Esse mollitia perferendis distinctio nostrum officiis.
+            Mollitia excepturi deleniti blanditiis reprehenderit aperiam, voluptas modi nemo quidem!
+        </p>
+    </div>
+
+    <div class="container my-4">
+        <h2 class="mx-5 mt-5">Les derniers biens</h2>
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-3">
+                    {% include('partials/card.html.twig') %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+<div class="card mb-3 mx-5" style="width: 18rem;">
+    <img src="{{ vich_uploader_asset(property, 'pictureFile') }}" class="card-img-top img-fluid" alt="{{ property.id }}" width="100%" style="height: 200px;">
+    {# <img src="{{ vich_uploader_asset(property, 'pictureFile') | imagine_filter('thumb') }}" class="card-img-top img-fluid" alt="{{ property.id }}" width="100%" style="height: 200px;"> #}
+    {# <img src="{{ asset('/images/properties/{{ property.picture }}') | imagine_filter('thumb') }}" /> #}
+    <div class="card-body">
+        <h5 class="card-title">{{ property.rooms }} pièces - {{ property.surface }}mètres carrés</h5>
+        <p class="card-text">
+            <a href="{{ url('properties.show', {'slug' : property.slug, 'property' : property.id}) }}" style="text-decoration: none;">
+                {# {{ (property.title|length > 40 ? property.title|slice(0, 40) ~ '...' :  property.title) }} #}
+                {{ property.title }}
+            </a> <br>
+            <span>{{ property.city }} ({{ property.formattedPrice }})</span> <br>
+            <span style="font-weight: bold; font-size: 1.5rem; color: #0d6efd;">{{ property.formattedPrice }}$</span>
+            {# {{ property.description|slice(0, 100) ~ (property.description|length > 100 ? '...' : '') }} #}
+        </p>
+        <a href="{{ url('properties.show', {'slug' : property.slug, 'property' : property.id}) }}" class="btn btn-primary btn-sm">Détails</a>
+    </div>
+</div>

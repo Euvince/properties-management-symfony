@@ -1,0 +1,42 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}
+    {{ app.current_route == 'admin.properties.create' ? 'Créer un bien!' : 'Éditer un bien!' }}
+{% endblock title %}
+
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block body %}
+
+    <h2><strong>{{ app.current_route == 'admin.properties.create' ? 'Créer un bien!' : 'Éditer un bien!' }}</strong></h2>
+    {{ form_start(form) }}
+        <div class="row d-flex">
+            <div class="col-md-3">{{ form_row(form.title) }}</div>
+            <div class="col-md-3">{{ form_row(form.slug) }}</div>
+            <div class="col-md-3">{{ form_row(form.price) }}</div>
+            <div class="col-md-3">{{ form_row(form.surface) }}</div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md-3">{{ form_row(form.rooms) }}</div>
+            <div class="col-md-3">{{ form_row(form.bedrooms) }}</div>
+            <div class="col-md-3">{{ form_row(form.adress) }}</div>
+            <div class="col-md-3">{{ form_row(form.city) }}</div>
+        </div>
+        <div class="row">{{ form_row(form.description) }}</div>
+        <div class="row d-flex">
+            <div class="col-md-3">{{ form_row(form.floor) }}</div>
+            <div class="col-md-3">{{ form_row(form.postal_code) }}</div>
+            <div class="col-md-3">{{ form_row(form.propertyType) }}</div>
+            <div class="col-md-3">{{ form_row(form.pictureFile) }}</div>
+        </div>
+        <div class="row d-flex">
+            <div class="col">{{ form_row(form.heaters) }}</div>
+            <div class="col">{{ form_row(form.specificities) }}</div>
+        </div>
+    {{ form_end(form) }}
+
+    {% block javascripts %}
+    {% endblock javascripts %}
+
+{% endblock body %}

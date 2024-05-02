@@ -1,0 +1,12 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}
+    {{ app.current_route == 'admin.heaters.create' ? 'Créer un chauffage!' : 'Éditer un chauffage!' }}
+{% endblock title %}
+
+{% block body %}
+
+    <h2><strong>{{ app.current_route == 'admin.heaters.create' ? 'Créer un chauffage!' : 'Éditer un chauffage!' }}</strong></h2>
+    {{ form(form) }}
+
+{% endblock body %}

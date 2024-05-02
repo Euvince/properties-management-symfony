@@ -1,0 +1,61 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}Listing des types de biens!{% endblock %}
+
+{% block body %}
+
+    <p>
+        <a class="btn btn-primary" style="text-decoration: none;" href="{{ url('admin.types.create') }}">Ajouter un type de bien</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Nombre de biens</th>
+                <th style="width: 200px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for type in types %}
+                <tr>
+                    <td>{{ type.id }}</td>
+                    <td>
+                        <a style="text-decoration: none;" href="{{ url('admin.types.show', {'slug' : type.slug, 'type' : type.id}) }}">{{ type.name }}</a>
+                    </td>
+                    <td>{{ type.properties.count() }}</td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary btn-sm" style="text-decoration: none;" href="{{ url('admin.types.edit', {'type' : type.id}) }}">Éditer</a>
+                            <a class="btn btn-danger btn-sm" style="text-decoration: none;" href="" data-bs-target="#modal{{ type.id }}" data-bs-toggle="modal">Supprimer</a>
+                        </div>
+                    </td>
+                </tr>
+                <div class="modal fade" tabindex="-1" id="modal{{ type.id }}">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Supprimer un type de bien</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Souhaitez-vous vraiment supprimer ce type de bien ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Annuler</button>
+                                <form action="{{ url('admin.types.delete', {'type' : type.id}) }}" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger btn-sm" href="">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(types) }}
+
+{% endblock %}

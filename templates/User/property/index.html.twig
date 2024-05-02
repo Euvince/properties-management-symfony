@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des biens!{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron text-center">
+        <h1>Agence de biens immobiliers</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+            Possimus commodi odit tempore perspiciatis maxime. Esse mollitia perferendis distinctio nostrum officiis.
+            Mollitia excepturi deleniti blanditiis reprehenderit aperiam, voluptas modi nemo quidem!
+        </p>
+    </div>
+
+    <div class="jumbotron">
+        <div class="container mx-5">
+            {{ form_start(form) }}
+                <div class="form-row align-items-end">
+                    <div class="row">
+                        <div class="col md">{{ form_row(form.maxPrice) }}</div>
+                        <div class="col md">{{ form_row(form.minSurface) }}</div>
+                        <div class="col md">{{ form_row(form.specificities) }}</div>
+                        <div class="col md">
+                            <button type="submit" class="btn btn-sm btn-primary">Rechercher</button>
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <h2 class="mx-5">Tous les biens</h2>
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-3">
+                    {% include('partials/card.html.twig') %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {{ knp_pagination_render(properties) }}
+
+{% endblock %}

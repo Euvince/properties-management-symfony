@@ -1,0 +1,12 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}
+    {{ app.current_route == 'admin.types.create' ? 'Créer un type de bien!' : 'Éditer un type de bien!' }}
+{% endblock title %}
+
+{% block body %}
+
+    <h2><strong>{{ app.current_route == 'admin.types.create' ? 'Créer un type de bien!' : 'Éditer un type de bien!' }}</strong></h2>
+    {{ form(form) }}
+
+{% endblock body %}

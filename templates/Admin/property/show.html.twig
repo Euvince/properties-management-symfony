@@ -1,0 +1,91 @@
+{# {% extends 'admin/admin.html.twig' %}
+
+{% block title %} Bien : {{ property.id }} {% endblock %}
+
+{% block body %} 
+    <h1>Informations sur le bien : {{ property.title }}</h1> <br>
+
+    <h3>Type de bien : {{ property.propertyType.name }}</h3>
+    <h3>Propriétaire : {{ property.user.email }}</h3>
+    <strong>Vendu : {{ property.sold == 1 ? 'Oui' : 'Non' }}</strong> <br>
+
+    <strong>Crée le : {{ property.createdAt | format_datetime() }}</strong>
+    <strong>Modifié le : {{ property.updatedAt | format_datetime() }}</strong>
+
+    <strong>Crée le : {{ property.createdAt | date('Y-m-d') }}</strong> <br>
+    <strong>Crée le : {{ property.updatedAt | date('Y-m-d') }}</strong>
+
+{% endblock %} #}
+
+
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}Détails d'un bien!{% endblock %}
+
+{% block body %}
+
+    <h1><strong>Informations sur le bien : {{ property.title }}</strong></h1> <br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ vich_uploader_asset(property, 'pictureFile') }}" class="card-img-top img-fluid" alt="..." style="height: 435px;">
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <h4><strong>{{ property.propertyType.name }} à vendre</strong></h4>
+                <p class="card-text">
+                    <strong><span>{{ property.title }} à {{ property.city }}</span></strong> <br>
+                    <strong><span>Propriétaire : {{ property.user.email }}</span></strong>, <strong><span>Vendu : {{ property.sold == 1 ? 'Oui' : 'Non' }}</span></strong> <br>
+                    <span style="font-weight: bold; font-size: 1.8rem; color: #0d6efd;">{{ property.formattedPrice }}$</span>
+                </p>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h3>Caractéristiques du bien</h3>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Surface habitable</td>
+                            <td>{{ property.surface }}mètres carrés</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre de pièces</td>
+                            <td>{{ property.rooms }}</td>
+                        </tr>
+                        <tr>
+                            <td>Étages</td>
+                            <td>{{ property.floor }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-3">
+                    <h3>Spécificités</h3>
+                    <ul>
+                        {% for specificity in property.specificities %}
+                            <li>{{ specificity.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3>Chauffages</h3>
+                    <ul>
+                        {% for heating in property.heaters %}
+                            <li>{{ heating.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div>
+            <p>
+                <hr>
+                {# <strong> {{ property.description|slice(0, 500) ~ (property.description|length > 100 ? '...' : '') }}</strong> #}
+                <strong> {{ property.description }}</strong>
+                <hr>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

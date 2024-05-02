@@ -1,0 +1,16 @@
+<p>
+    Une nouvelle demande de contact a été reçue de {{ data.email }} à propos du bien {{ data.property.title }}
+    {# <a href="{{ path('properties.show', {'slug' : data.property.slug, 'property' : data.property.id}) }}" style="text-decoration: none;">{{ data.property.title }}</a> #}
+</p>
+
+<ul>
+    <li>Nom : {{ data.firstname }}</li>
+    <li>Prénom(s) : {{ data.lastname != null ? data.lastname : 'Non renseigné.' }}</li>
+    <li>Email : {{ data.email }}</li>
+    <li>Téléphone : {{ data.phone }}</li>
+</ul>
+
+<p>
+    <strong>Message </strong> : <br>
+    {{ data.message | nl2br }}
+</p>

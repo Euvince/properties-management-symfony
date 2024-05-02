@@ -1,0 +1,13 @@
+<p>Une nouvelle demande de contact a été reçue de {{ data.email }}</p>
+
+<ul>
+    <li>Nom : {{ data.firstname }}</li>
+    <li>Prénom(s) : {{ data.lastname != null ? data.lastname : 'Non renseigné.' }}</li>
+    <li>Email : {{ data.email }}</li>
+    <li>Téléphone : {{ data.phone }}</li>
+</ul>
+
+<p>
+    <strong>Message </strong> : <br>
+    {{ data.message | nl2br }}
+</p>

@@ -1,0 +1,12 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}
+    {{ app.current_route == 'admin.specificities.create' ? 'Créer une spécificité!' : 'Éditer une spécificité!' }}
+{% endblock title %}
+
+{% block body %}
+
+    <h2><strong>{{ app.current_route == 'admin.specificities.create' ? 'Créer une spécificité!' : 'Éditer une spécificité!' }}</strong></h2>
+    {{ form(form) }}
+
+{% endblock body %}

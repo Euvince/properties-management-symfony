@@ -1,0 +1,63 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}Listing des biens!{% endblock %}
+
+{% block body %}
+
+    <p>
+        <a class="btn btn-primary" style="text-decoration: none;" href="{{ url('admin.properties.create') }}">Ajouter un bien</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Chauffages</th>
+                <th>Spécificités</th>
+                <th style="width: 200px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for property in properties %}
+                <tr>
+                    <td>{{ property.id }}</td>
+                    <td>
+                        <a style="text-decoration: none;" href="{{ url('admin.properties.show', {'slug' : property.slug, 'property' : property.id}) }}">{{ property.title }}</a>
+                    </td>
+                    <td>{{ property.heaters.count() }}</td>
+                    <td>{{ property.specificities.count() }}</td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary btn-sm" style="text-decoration: none;" href="{{ url('admin.properties.edit', {'property' : property.id}) }}">Éditer</a>
+                            <a class="btn btn-danger btn-sm" style="text-decoration: none;" href="" data-bs-target="#modal{{ property.id }}" data-bs-toggle="modal">Supprimer</a>
+                        </div>
+                    </td>
+                </tr>
+                <div class="modal fade" tabindex="-1" id="modal{{ property.id }}">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Supprimer un bien</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Souhaitez-vous vraiment supprimer ce bien ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Annuler</button>
+                                <form action="{{ url('admin.properties.delete', {'property' : property.id}) }}" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger btn-sm" href="">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(properties) }}
+
+{% endblock %}

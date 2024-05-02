@@ -1,0 +1,61 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}Listing des spécificités!{% endblock %}
+
+{% block body %}
+
+    <p>
+        <a class="btn btn-primary" style="text-decoration: none;" href="{{ url('admin.specificities.create') }}">Ajouter une spécificité</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Nombre de biens</th>
+                <th style="width: 200px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for specificity in specificities %}
+                <tr>
+                    <td>{{ specificity.id }}</td>
+                    <td>
+                        <a style="text-decoration: none;" href="{{ url('admin.specificities.show', {'slug' : specificity.slug, 'specificity' : specificity.id}) }}">{{ specificity.name }}</a>
+                    </td>
+                    <td>{{ specificity.properties.count() }}</td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary btn-sm" style="text-decoration: none;" href="{{ url('admin.specificities.edit', {'specificity' : specificity.id}) }}">Éditer</a>
+                            <a class="btn btn-danger btn-sm" style="text-decoration: none;" href="" data-bs-target="#modal{{ specificity.id }}" data-bs-toggle="modal">Supprimer</a>
+                        </div>
+                    </td>
+                </tr>
+                <div class="modal fade" tabindex="-1" id="modal{{ specificity.id }}">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Supprimer une spécificité</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Souhaitez-vous vraiment supprimer cette spécificité ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Annuler</button>
+                                <form action="{{ url('admin.specificities.delete', {'specificity' : specificity.id}) }}" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger btn-sm" href="">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(specificities) }}
+
+{% endblock %}
